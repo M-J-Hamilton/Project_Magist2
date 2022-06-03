@@ -1,0 +1,30 @@
+Total Products Sold
+{FIXED[Order Item Id]: SUM( IF [Order Status] IN ("delivered", "approved", "invoiced", "processing", "shipped") THEN 1 ELSE 0 END)}
+
+
+No of Months
+DATEDIFF('month', MIN([Order Purchase Timestamp]),MAX([Order Purchase Timestamp]))
+
+No of Products
+COUNT([Product Id (Products.Csv)])
+
+Products Sold
+COUNT([Order Item Id])
+
+Actual TRT
+ROUND(DATEDIFF("day",[Order Purchase Timestamp],[Order Delivered Customer Date] ),0)
+
+Estimated TRT
+ROUND(DATEDIFF("day",[Order Purchase Timestamp],[Order Estimated Delivery Date] ),0)
+
+TRT Difference
+[Actual TRT] - [Estimated TRT]
+
+AVG TRT
+ROUND(AVG(DATEDIFF("day",[Order Purchase Timestamp],[Order Delivered Customer Date] )),0)
+
+Longest TRT
+ROUND(MAX(DATEDIFF("day",[Order Purchase Timestamp],[Order Delivered Customer Date] )),0)
+
+Shortest TRT
+ROUND(MIN(DATEDIFF("day",[Order Purchase Timestamp],[Order Delivered Customer Date] )),0)
